@@ -3,7 +3,8 @@ from flask import Flask,request,jsonify,render_template
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-app = Flask(__name__)
+application = Flask(__name__)
+app = application
 
  ## import ridge regressor model and standard scalar pickle file
 ridge_model=pickle.load(open('model/ridge.pkl','rb'))
@@ -11,11 +12,11 @@ standard_scaler=pickle.load(open('model/scaler.pkl','rb'))
 
 
 #Route for home page
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/predictdata',methods=['GET','POST'])
+@application.route('/predictdata',methods=['GET','POST'])
 def predict_datapoint():
     if request.method == 'POST':
         Temperature = float(request.form.get('Temperature'))
